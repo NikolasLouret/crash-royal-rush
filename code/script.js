@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const height = canvas.height
 	const position = 20
 	const min = 2.4
-	const max = 5.3
+	const max = 15.7
 	const crash = Math.random() * (max - min) + min
 
 	let timerRunning = false
