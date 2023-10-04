@@ -6,7 +6,7 @@
 Este é um projeto de desenvolvimento de um jogo de Crash de Cassino totalmente em JavaScript. O jogo é uma representação virtual do popular jogo de cassino "Crash", onde os jogadores apostam em um gráfico de aumento de valor e tentam sair antes que ele "crashe".
 
 ## Implementação do Jogo
-O jogo de Crash de Cassino foi desenvolvido principalmente com JavaScript, aproveitando a poderosa capacidade dessa linguagem para manipular a lógica do jogo em tempo real. A renderização visual do jogo é feita na tag `<canvas>` do HTML, permitindo uma experiência de jogo envolvente.
+O jogo de Crash de Cassino foi desenvolvido principalmente com JavaScript para manipulação da lógica do jogo em tempo real. A renderização visual do jogo é feita na tag `<canvas>` do HTML, permitindo uma experiência de jogo envolvente.
 
 ### Lógica do Jogo
 A lógica do jogo é implementada em JavaScript, e o Gráfico de Aumento de Valor é gerado aleatoriamente e, conforme o jogo progride, o valor aumenta de forma dinâmica. Isso é feito usando funções JavaScript para atualizar o valor do gráfico em intervalos regulares.
