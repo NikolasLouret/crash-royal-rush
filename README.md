@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="/crash-gambling.gif" width="630" height="355"/>
+  <img src="./crash-gambling.gif" width="630" height="355"/>
 </p>
 
 # crash-royal-rush
