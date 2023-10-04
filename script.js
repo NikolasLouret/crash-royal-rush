@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	const width = canvas.width
 	const height = canvas.height
 	const position = 20
-	const crash = 15.5 //Math.random() * (5.8 - 2.0) + 2.0
+	const min = 1.0
+	const max = 2.5
+	const crash = Math.random() * (max - min) + min
 
 	let i = 0
 
