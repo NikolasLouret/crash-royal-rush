@@ -1,4 +1,7 @@
-![](crash-gambling.gif)
+<p align="center">
+  <img src="/crash-gambling.gif" width="630" height="355"/>
+</p>
+
 # crash-royal-rush
 Este é um projeto de desenvolvimento de um jogo de Crash de Cassino totalmente em JavaScript. O jogo é uma representação virtual do popular jogo de cassino "Crash", onde os jogadores apostam em um gráfico de aumento de valor e tentam sair antes que ele "crashe".
 
