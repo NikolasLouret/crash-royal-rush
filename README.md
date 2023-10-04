@@ -23,8 +23,6 @@ A tag `<canvas>` do HTML é usada para renderizar visualmente o jogo na interfac
 
 * HTML/CSS: Utilizados para criar a interface de usuário elegante e responsiva.
 
-* Node.js: Usado para implementar o servidor que lida com as operações do jogo.
-
 * WebSocket: Faz a comunicação entre a aplicação e o [backend do Royal Rush](https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti5-5104100-royal-rush).
 
 ## Como Executar o Jogo
