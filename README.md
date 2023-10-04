@@ -21,7 +21,7 @@ A tag `<canvas>` do HTML é usada para renderizar visualmente o jogo na interfac
 ## Tecnologias Utilizadas
 * JavaScript: A linguagem principal de programação usada para desenvolver a lógica do jogo.
 
-* HTML/CSS: Utilizados para criar a interface de usuário elegante e responsiva.
+* HTML/CSS: Utilizados para criar a interface do jogo.
 
 * WebSocket: Faz a comunicação entre a aplicação e o [backend do Royal Rush](https://github.com/ICEI-PUC-Minas-PPLES-TI/plf-es-2023-2-ti5-5104100-royal-rush).
 
