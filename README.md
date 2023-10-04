@@ -33,4 +33,4 @@ Para adicionar o jogo no site, uma das formas é utilziar a tag `iframe` do html
 em que o `width` e `height` correspondem ao tamanho desejado do `canvas` (recomendado utilizar o tamanho do canvas 600x320) e o `src` é a url da aplicação a ser espelhada.
 
 ## Como Abrir o Jogo
-É possível acesar o jogo através [deste link](https://nikolaslouret.github.io/crash-royal-rush/code)
+É possível acessar o jogo através [deste link](https://nikolaslouret.github.io/crash-royal-rush/code)
