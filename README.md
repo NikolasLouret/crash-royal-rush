@@ -28,9 +28,9 @@ A tag `<canvas>` do HTML é usada para renderizar visualmente o jogo na interfac
 ## Como Adicionar em outras páginas
 Para adicionar o jogo no site, uma das formas é utilziar a tag `iframe` do html que é utilizada para inserir conteúdos externos em uma página. Segue abaixo um exemplo de uso:
 ~~~html
-<iframe width="600" height="320" src="https://nikolaslouret.github.io/crash-royal-rush/"></iframe>
+<iframe width="600" height="320" src="https://nikolaslouret.github.io/crash-royal-rush/code"></iframe>
 ~~~  
 em que o `width` e `height` correspondem ao tamanho desejado do `canvas` (recomendado utilizar o tamanho do canvas 600x320) e o `src` é a url da aplicação a ser espelhada.
 
 ## Como Abrir o Jogo
-É possível acesar o jogo através [deste link](https://nikolaslouret.github.io/crash-royal-rush/)
+É possível acesar o jogo através [deste link](https://nikolaslouret.github.io/crash-royal-rush/code)
