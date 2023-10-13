@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	const width = canvas.width
 	const height = canvas.height
 	const position = 20
-	const min = 2.4
-	const max = 15.7
+	const min = 1.1
+	const max = 1.3
 	const crash = Math.random() * (max - min) + min
 
 	let timerRunning = false
@@ -93,13 +93,13 @@ document.addEventListener('DOMContentLoaded', function () {
 					clear()
 
 					// Desenha um timer de 5s na tela
-					timer(5000)
+					timer(5_000)
 
 					// Iniciar a próxima rodada
 					setTimeout(() => {
 						animatePathDrawing(ctx, position, height - position, width - position, position, crash - 1)
-					}, 5500) // Agendar a próxima rodada após 8.5 segundos
-				}, 3000) // Agendar o timer de 3 segundos para a nova rodada
+					}, 5_500) // Agendar a próxima rodada após 8.5 segundos
+				}, 3_000) // Agendar o timer de 3 segundos para a nova rodada
 			}
 		}
 
@@ -141,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Desenhar um círculo no ponto final da curva
 		ctx.beginPath()
-		ctx.arc(nendX, nendY, 5, 0, 2 * Math.PI)
+		ctx.arc(nendX, nendY, 10, 0, 2 * Math.PI)
 		ctx.fill()
 	}
 
@@ -169,24 +169,24 @@ document.addEventListener('DOMContentLoaded', function () {
 					timerRunning = false
 				} else {
 					// Limpar a área do timer
-					ctx.clearRect(x - 125, y - 15, 250, 30)
+					ctx.clearRect(x - 300, y - 30, 600, 60)
 
 					// Desenhar o fundo cinza
 					ctx.beginPath()
 					ctx.fillStyle = '#d3d3d3'
-					ctx.roundRect(x - 125, y - 15, 250, 30, 5)
+					ctx.roundRect(x - 300, y - 30, 600, 60, 10)
 					ctx.fill()
 					ctx.closePath()
 
 					// Desenhar a parte preenchida em cinza escuro
 					ctx.beginPath()
 					ctx.fillStyle = '#c3c3c3'
-					ctx.roundRect(x - 125, y - 15, timerWidth / (timerDuration / 250), 30, 5)
+					ctx.roundRect(x - 300, y - 30, timerWidth / (timerDuration / 600), 60, 10)
 					ctx.fill()
 					ctx.closePath()
 
 					// Atualizar o texto do timer
-					updateText((timerWidth / 1000).toFixed(1) + 's', x, y + 5, '15px Consolas')
+					updateText((timerWidth / 1000).toFixed(1) + 's', x, y + 15, '50px Consolas')
 
 					timerWidth += interval
 				}
@@ -206,19 +206,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Fundo do retângulo
 		ctx.fillStyle = '#d3d3d3'
-		ctx.roundRect(x - 75, y - 40, 150, 60, [10, 10, 0, 0])
+		ctx.roundRect(x - 100, y - 75, 200, 110, [10, 10, 0, 0])
 		ctx.fill()
 
 		// Texto do valor do crash
-		updateText(crash.toFixed(2) + 'X', x, y, '30px Consolas')
+		updateText(crash.toFixed(2) + 'X', x, y, '60px Consolas')
 
 		// Fundo do retângulo inferior
 		ctx.fillStyle = 'gray'
-		ctx.roundRect(x - 75, y + 20, 150, 30, [0, 0, 10, 10])
+		ctx.roundRect(x - 100, y + 30, 200, 40, [0, 0, 10, 10])
 		ctx.fill()
 
 		// Texto "CRASHED"
-		updateText('CRASHED', x, y + 40, '15px Consolas')
+		updateText('CRASHED', x, y + 60, '30px Consolas')
 
 		ctx.closePath()
 	}
@@ -228,11 +228,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Fundo do retângulo
 		ctx.fillStyle = '#d3d3d3'
-		ctx.roundRect(x - 75, y - 40, 150, 60, 10)
+		ctx.roundRect(x - 100, y - 75, 200, 110, 10)
 		ctx.fill()
 
 		// Valor do crash
-		updateText((progress + 1).toFixed(2) + 'X', x, y, '30px Consolas')
+		updateText((progress + 1).toFixed(2) + 'X', x, y, '60px Consolas')
 
 		ctx.closePath()
 	}
