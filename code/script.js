@@ -169,24 +169,24 @@ document.addEventListener('DOMContentLoaded', function () {
 					timerRunning = false
 				} else {
 					// Limpar a área do timer
-					ctx.clearRect(x - 300, y - 30, 600, 60)
+					ctx.clearRect(x - (width - 200) / 2, y - 65, width - 200, 130)
 
 					// Desenhar o fundo cinza
 					ctx.beginPath()
 					ctx.fillStyle = '#d3d3d3'
-					ctx.roundRect(x - 300, y - 30, 600, 60, 10)
+					ctx.roundRect(x - (width - 200) / 2, y - 65, width - 200, 130, 10)
 					ctx.fill()
 					ctx.closePath()
 
 					// Desenhar a parte preenchida em cinza escuro
 					ctx.beginPath()
 					ctx.fillStyle = '#c3c3c3'
-					ctx.roundRect(x - 300, y - 30, timerWidth / (timerDuration / 600), 60, 10)
+					ctx.roundRect(x - (width - 200) / 2, y - 65, timerWidth / (timerDuration / (width - 200)), 130, 10)
 					ctx.fill()
 					ctx.closePath()
 
 					// Atualizar o texto do timer
-					updateText((timerWidth / 1000).toFixed(1) + 's', x, y + 15, '50px Consolas')
+					updateText((timerWidth / 1000).toFixed(1) + 's', x, y + 30, '100px Consolas')
 
 					timerWidth += interval
 				}
@@ -206,19 +206,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Fundo do retângulo
 		ctx.fillStyle = '#d3d3d3'
-		ctx.roundRect(x - 100, y - 75, 200, 110, [10, 10, 0, 0])
+		ctx.roundRect(x - 200, y - 110, 400, 150, [10, 10, 0, 0])
 		ctx.fill()
 
 		// Texto do valor do crash
-		updateText(crash.toFixed(2) + 'X', x, y, '60px Consolas')
+		updateText(crash.toFixed(2) + 'X', x, y, '100px Consolas')
 
 		// Fundo do retângulo inferior
 		ctx.fillStyle = 'gray'
-		ctx.roundRect(x - 100, y + 30, 200, 40, [0, 0, 10, 10])
+		ctx.roundRect(x - 200, y + 30, 400, 80, [0, 0, 10, 10])
 		ctx.fill()
 
 		// Texto "CRASHED"
-		updateText('CRASHED', x, y + 60, '30px Consolas')
+		updateText('CRASHED', x, y + 90, '60px Consolas')
 
 		ctx.closePath()
 	}
@@ -228,11 +228,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Fundo do retângulo
 		ctx.fillStyle = '#d3d3d3'
-		ctx.roundRect(x - 100, y - 75, 200, 110, 10)
+		ctx.roundRect(x - 200, y - 110, 400, 150, 10)
 		ctx.fill()
 
 		// Valor do crash
-		updateText((progress + 1).toFixed(2) + 'X', x, y, '60px Consolas')
+		updateText((progress + 1).toFixed(2) + 'X', x, y, '100px Consolas')
 
 		ctx.closePath()
 	}
