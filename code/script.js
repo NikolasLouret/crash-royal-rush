@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	const ctx = canvas.getContext('2d')
 	const width = canvas.width
 	const height = canvas.height
-	const position = 20
+	const position = 50
 	const min = 50
 	const max = 55
 	const crash = Math.random() * (max - min) + min
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	let timerRunning = false
 
 	function init() {
-		animatePathDrawing(ctx, position, height - position, width - position - 30, position + 30, crash - 1)
+		animatePathDrawing(ctx, position, height - position, width - position, position, crash - 1)
 	}
 
 	function animatePathDrawing(ctx, startX, startY, endX, endY, crashNum) {
