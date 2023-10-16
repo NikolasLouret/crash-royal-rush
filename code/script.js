@@ -1,17 +1,23 @@
+const BG_PRIMARY = '#282828'
+const BG_SECONDARY = '#434343'
+const YELLOW_PRIMARY = '#FFCA10'
+const YELLOW_SECONDARY = '#FFB800'
+const WHITE = '#FFF'
+
 document.addEventListener('DOMContentLoaded', function () {
 	const canvas = document.getElementById('canvas')
 	const ctx = canvas.getContext('2d')
 	const width = canvas.width
 	const height = canvas.height
 	const position = 20
-	const min = 1.1
-	const max = 1.3
+	const min = 50
+	const max = 55
 	const crash = Math.random() * (max - min) + min
 
 	let timerRunning = false
 
 	function init() {
-		animatePathDrawing(ctx, position, height - position, width - position, position, crash - 1)
+		animatePathDrawing(ctx, position, height - position, width - position - 30, position + 30, crash - 1)
 	}
 
 	function animatePathDrawing(ctx, startX, startY, endX, endY, crashNum) {
@@ -36,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			const progress = deltaTime / 10_000
 
 			// Aumentar a aceleração com base no progresso
-			acceleration += progress * 5
+			acceleration += progress * 3
 
 			if (progress < crashNum) {
 				// Limpar o canvas
@@ -44,8 +50,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				// Ajustar a variação do controle com base no progresso
 				if (progress > 1.0) {
-					controlXVariance += acceleration / (progress * 100_000)
-					controlYVariance += acceleration / (progress * 100_000)
+					const controll = (progress * 50_000) / acceleration / 150
+
+					if (progress > 20.0) {
+						controlXVariance += controll * 1.3
+					} else {
+						controlXVariance += controll
+						controlYVariance += controll
+					}
 				}
 
 				// Desenhar a curva de Bezier
@@ -108,8 +120,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	function drawBezierSplit(ctx, startX, startY, controllX, controllY, endX, endY, t0, t1) {
-		ctx.beginPath()
-
 		// Cálculos para o ponto inicial da curva de Bezier
 		var t00 = t0 * t0
 		var t01 = 1.0 - t0
@@ -136,12 +146,16 @@ document.addEventListener('DOMContentLoaded', function () {
 		ctx.moveTo(nstartX, nstartY)
 		ctx.quadraticCurveTo(ncontrollX, ncontrollY, nendX, nendY)
 
+		ctx.lineWidth = 15
+		ctx.strokeStyle = YELLOW_SECONDARY
+		ctx.lineCap = 'round'
 		ctx.stroke()
 		ctx.closePath()
 
 		// Desenhar um círculo no ponto final da curva
 		ctx.beginPath()
-		ctx.arc(nendX, nendY, 10, 0, 2 * Math.PI)
+		ctx.fillStyle = YELLOW_PRIMARY
+		ctx.arc(nendX, nendY, 30, 0, 2 * Math.PI)
 		ctx.fill()
 	}
 
@@ -173,20 +187,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
 					// Desenhar o fundo cinza
 					ctx.beginPath()
-					ctx.fillStyle = '#d3d3d3'
-					ctx.roundRect(x - (width - 200) / 2, y - 65, width - 200, 130, 10)
+					ctx.fillStyle = BG_SECONDARY
+					ctx.roundRect(x - (width - 200) / 2, y - 70, width - 200, 140, 10)
 					ctx.fill()
 					ctx.closePath()
 
-					// Desenhar a parte preenchida em cinza escuro
+					// Desenhar a parte preenchida em amarelo
 					ctx.beginPath()
-					ctx.fillStyle = '#c3c3c3'
-					ctx.roundRect(x - (width - 200) / 2, y - 65, timerWidth / (timerDuration / (width - 200)), 130, 10)
+					ctx.fillStyle = YELLOW_PRIMARY
+					ctx.roundRect(x - (width - 250) / 2, y - 50, timerWidth / (timerDuration / (width - 250)), 100, 10)
 					ctx.fill()
 					ctx.closePath()
 
 					// Atualizar o texto do timer
-					updateText((timerWidth / 1000).toFixed(1) + 's', x, y + 30, '100px Consolas')
+					updateText((timerWidth / 1000).toFixed(1) + 's', x, y + 30, WHITE, '100px Consolas')
 
 					timerWidth += interval
 				}
@@ -205,20 +219,20 @@ document.addEventListener('DOMContentLoaded', function () {
 		ctx.beginPath()
 
 		// Fundo do retângulo
-		ctx.fillStyle = '#d3d3d3'
-		ctx.roundRect(x - 200, y - 110, 400, 150, [10, 10, 0, 0])
+		ctx.fillStyle = YELLOW_PRIMARY
+		ctx.roundRect(x - 200, y - 160, 400, 200, [10, 10, 0, 0])
 		ctx.fill()
 
 		// Texto do valor do crash
-		updateText(crash.toFixed(2) + 'X', x, y, '100px Consolas')
+		updateText(crash.toFixed(2) + 'X', x, y - 30, WHITE, '100px Consolas')
 
 		// Fundo do retângulo inferior
-		ctx.fillStyle = 'gray'
+		ctx.fillStyle = YELLOW_SECONDARY
 		ctx.roundRect(x - 200, y + 30, 400, 80, [0, 0, 10, 10])
 		ctx.fill()
 
 		// Texto "CRASHED"
-		updateText('CRASHED', x, y + 90, '60px Consolas')
+		updateText('CRASHED', x, y + 90, WHITE, '60px Consolas')
 
 		ctx.closePath()
 	}
@@ -227,21 +241,21 @@ document.addEventListener('DOMContentLoaded', function () {
 		ctx.beginPath()
 
 		// Fundo do retângulo
-		ctx.fillStyle = '#d3d3d3'
+		ctx.fillStyle = BG_SECONDARY
 		ctx.roundRect(x - 200, y - 110, 400, 150, 10)
 		ctx.fill()
 
 		// Valor do crash
-		updateText((progress + 1).toFixed(2) + 'X', x, y, '100px Consolas')
+		updateText((progress + 1).toFixed(2) + 'X', x, y, WHITE, '100px Consolas')
 
 		ctx.closePath()
 	}
 
-	function updateText(text, x, y, font) {
+	function updateText(text, x, y, color, font) {
 		ctx.beginPath()
 
 		ctx.font = font
-		ctx.fillStyle = 'black'
+		ctx.fillStyle = color
 		ctx.textAlign = 'center'
 		ctx.fillText(text, x, y)
 
