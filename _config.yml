@@ -2,4 +2,4 @@ remote_theme: pages-themes/cayman@v0.2.0
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
 title: Crash Royal Rush
-description: Este é um projeto de desenvolvimento de um jogo de Crash de Cassino totalmente em JavaScript. O jogo é uma representação virtual do popular jogo de cassino "Crash", onde os jogadores apostam em um gráfico de aumento de valor e tentam sair antes que ele "crashe"
+description: Desenvolvimento de um jogo de Crash de Cassino totalmente em JavaScript.
