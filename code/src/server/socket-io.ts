@@ -1,11 +1,11 @@
 import { io } from './http'
-import createGame from '../controller/game-instance'
 import { CommandFunctionType } from '../types/GameType'
+import createGame from '../controller/game-instance'
 
 const game = createGame()
 game.start()
 
-io.on('connection', socket => {
+io.on('connection', (socket: any) => {
 	const commandFunction = (command: CommandFunctionType) => {
 		socket.emit(command.type, command)
 	}

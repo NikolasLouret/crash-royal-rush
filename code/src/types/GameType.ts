@@ -1,6 +1,6 @@
 export type ObserverType = {
 	id: string
-	function: (viewe: CommandFunctionType) => void
+	function: (viewer: CommandFunctionType) => void
 }
 
 export type CommandFunctionType = {
