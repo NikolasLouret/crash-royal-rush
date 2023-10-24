@@ -1,5 +1,5 @@
-const { server } = require('./http')
-require('./socket-io')
+import { server } from './http'
+import './socket-io'
 
 const port = process.env.PORT || 5500
 
