@@ -69,7 +69,7 @@ function createCanvas() {
 				clearInterval(timerInterval)
 			} else {
 				// Limpar a área do timer
-				canvas.clear()
+				clear()
 
 				// Desenhar o fundo cinza
 				ctx.beginPath()
