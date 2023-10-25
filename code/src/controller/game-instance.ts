@@ -94,7 +94,7 @@ export default function createGame() {
 	}
 
 	function calculateTimeCrash() {
-		const min = 80
+		const min = 1
 		const max = 100
 
 		return Math.random() * (max - min) + min
