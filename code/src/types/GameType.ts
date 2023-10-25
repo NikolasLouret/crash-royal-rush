@@ -1,17 +1,28 @@
 export type ObserverType = {
 	id: string
-	function: (viewer: CommandFunctionType) => void
+	function: Function
 }
 
-export type CommandFunctionType = {
+export type CommandFunctionGameType = {
 	type: string
-	state: GameType
+	state?: GameType
+}
+
+export type CommandFunctionViewerType = {
+	type: string
+	status: GameStatus
 }
 
 export type GameType = {
-	timeCrash: number
-	isCrashed: boolean
+	crashes: number[]
+	gameOcurring: boolean
 	currentTimeCrash: number
 	timer: number
 	curveControll: number
+	lastCrash: number
+}
+
+export type GameStatus = {
+	crashes?: number[]
+	isGameOcurring: boolean
 }
