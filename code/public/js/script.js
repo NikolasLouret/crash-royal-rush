@@ -8,7 +8,7 @@ function renderGame() {
 	let currentCrash = 0
 
 	const start = state => {
-		crashTime = state.timeCrash
+		crashTime = state.lastCrash
 		currentCrash = state.currentTimeCrash
 
 		animatePathDrawing(0, canvas.height, canvas.width - 30, 30, crashTime)
@@ -16,7 +16,7 @@ function renderGame() {
 
 	function setup(state) {
 		canvas.clear()
-		crashTime = state.timeCrash
+		crashTime = state.lastCrash
 		currentCrash = state.currentTimeCrash
 		const controll = state.curveControll * 10
 
@@ -79,7 +79,7 @@ function renderGame() {
 				if (progress > 1.0) {
 					const controll = crashTime / currentTime / 10
 
-					if (progress > 5.5) {
+					if (progress > 5) {
 						controlXVariance += controll * 1.3
 					} else {
 						controlXVariance += controll
@@ -114,16 +114,7 @@ function renderGame() {
 	function crashed() {
 		// Mostrar a mensagem de crash
 		canvas.crashMessage(progress + 1)
-
 		progress = 0
-
-		setTimeout(() => {
-			// Limpa o canvas
-			canvas.clear()
-
-			// Imprime o timer
-			canvas.timer(TIMER)
-		}, 3_000)
 	}
 
 	return {

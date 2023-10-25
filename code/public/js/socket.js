@@ -12,14 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	})
 
 	socket.on('start-game', data => {
-		game.start(data.state)
+		game.start(data)
 	})
 
-	socket.on('crashed', data => {
+	socket.on('crashed', () => {
 		game.crashed()
 	})
 
 	socket.on('timer', data => {
-		game.timer(data.state)
+		game.timer(data)
 	})
 })
