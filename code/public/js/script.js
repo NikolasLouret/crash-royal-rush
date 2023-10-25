@@ -23,8 +23,8 @@ function renderGame() {
 		let controlXVariance = canvas.width / 2
 		let controlYVariance = canvas.height / 2
 
-		if (currentCrash > 20.0) {
-			controlXVariance += controll * 1.3
+		if (currentCrash > 30.0) {
+			controlXVariance += controll
 		} else {
 			controlXVariance += controll
 			controlYVariance += controll
@@ -58,6 +58,7 @@ function renderGame() {
 		let startTime = new Date().getTime()
 		let teste = 0
 
+		let teste = 0
 		// Variáveis para o controle da curva de Bezier
 		let controlXVariance = canvas.width / 2 + (curveControll || 0)
 		let controlYVariance = canvas.height / 2 + (curveControll || 0)
@@ -81,7 +82,7 @@ function renderGame() {
 				// Ajustar a variação do controle com base no progresso
 				if (progress > 1.0) {
 					if (progress > 3) {
-						controlXVariance += controll
+						controlXVariance += controll / 3
 					} else {
 						controlXVariance += controll
 						controlYVariance += controll
