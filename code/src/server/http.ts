@@ -7,6 +7,15 @@ const app = express()
 app.use(express.static(path.join(__dirname, '../../', 'public')))
 
 const server = http.createServer(app)
+
 const io = new Server(server)
 
-export { server, io }
+const endpoint = new Server(server, {
+	path: '/api/',
+	cors: {
+		origin: true,
+		credentials: true,
+	},
+})
+
+export { server, io, endpoint }
