@@ -78,7 +78,7 @@ export default function createGame() {
 
 			// Calculo da curva
 			if (deltaTime > 10) {
-				const controll = state.lastCrash / deltaTime / 13
+				const controll = state.lastCrash / deltaTime / 15
 				state.curveControll += controll
 			}
 
@@ -94,7 +94,7 @@ export default function createGame() {
 	}
 
 	function calculateTimeCrash() {
-		const min = 1
+		const min = 80
 		const max = 100
 
 		return Math.random() * (max - min) + min
