@@ -77,10 +77,10 @@ function renderGame() {
 
 				// Ajustar a variação do controle com base no progresso
 				if (progress > 1.0) {
-					const controll = crashTime / currentTime / 10
+					const controll = crashTime / currentTime / 13
 
-					if (progress > 5) {
-						controlXVariance += controll * 1.3
+					if (progress > 3) {
+						controlXVariance += controll
 					} else {
 						controlXVariance += controll
 						controlYVariance += controll
