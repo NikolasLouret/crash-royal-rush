@@ -56,6 +56,7 @@ function renderGame() {
 
 	function animatePathDrawing(startX, startY, endX, endY, crashNum, curveControll) {
 		let startTime = new Date().getTime()
+		let teste = 0
 
 		let teste = 0
 		// Variáveis para o controle da curva de Bezier
