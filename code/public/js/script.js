@@ -55,21 +55,24 @@ function renderGame() {
 	}
 
 	function animatePathDrawing(startX, startY, endX, endY, crashNum, curveControll) {
-		let startTime = null
+		let startTime = new Date().getTime()
+		let teste = 0
 
 		// Variáveis para o controle da curva de Bezier
 		let controlXVariance = canvas.width / 2 + (curveControll || 0)
 		let controlYVariance = canvas.height / 2 + (curveControll || 0)
 
-		async function step(timestamp) {
-			if (!startTime) {
-				startTime = timestamp
-			}
+		async function step() {
+			const timestamp = new Date().getTime()
 
 			// Calcular o progresso baseado no tempo decorrido
 			const deltaTime = timestamp - startTime + (currentCrash ? currentCrash * 1_000 : 0)
 			const currentTime = deltaTime / 1_000
 			progress = currentTime / 10
+
+			const controll = crashTime / currentTime / 15
+			// teste += progress + 1 / controll
+			// console.log(teste)
 
 			if (currentTime < crashNum) {
 				// Limpar o canvas
@@ -77,8 +80,6 @@ function renderGame() {
 
 				// Ajustar a variação do controle com base no progresso
 				if (progress > 1.0) {
-					const controll = crashTime / currentTime / 13
-
 					if (progress > 3) {
 						controlXVariance += controll
 					} else {
