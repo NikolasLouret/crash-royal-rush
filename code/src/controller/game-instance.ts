@@ -1,41 +1,73 @@
-import { ObserverType, GameType, CommandFunctionType } from '../types/GameType'
+import {
+	ObserverType,
+	GameType,
+	CommandFunctionGameType as CommandObserverType,
+	CommandFunctionViewerType as CommandViewerType,
+	GameStatus,
+} from '../types/GameType'
+import { ObserverEnum } from '../types/ObserverEnum'
+
+const MAX_CRAHSES_LENTH = 25
 
 const TIMER = 5_000
 
 export default function createGame() {
 	let observers: ObserverType[] = []
+	let viewers: ObserverType[] = []
 
 	const state: GameType = {
-		timeCrash: 0,
-		isCrashed: false,
+		crashes: [],
+		gameOcurring: false,
 		currentTimeCrash: 0,
 		timer: 0,
 		curveControll: 0,
+		lastCrash: 0,
 	}
 
-	function subscribe(viewer: ObserverType) {
-		observers.push(viewer)
+	function subscribe(observer: ObserverType, type: ObserverEnum) {
+		if (type === ObserverEnum.LOCAL) observers.push(observer)
+		else if (type === ObserverEnum.ROYAL_RUSH) viewers.push(observer)
+		else return false
 	}
 
-	function unsubscribe(id: string) {
-		observers = observers.filter(viewer => viewer.id !== id)
+	function unsubscribe(id: string, type: ObserverEnum) {
+		if (type === ObserverEnum.LOCAL) observers = observers.filter(observer => observer.id !== id)
+		else if (type === ObserverEnum.ROYAL_RUSH) viewers = viewers.filter(viewer => viewer.id !== id)
+		else return false
 	}
 
-	function notifyAll(command: CommandFunctionType) {
-		for (const viewer of observers) {
+	function notifyAllObservers(command: CommandObserverType) {
+		for (const observer of observers) {
+			observer.function(command)
+		}
+	}
+	function notifyAllViewers(command: CommandViewerType) {
+		for (const viewer of viewers) {
 			viewer.function(command)
 		}
 	}
 
+	function setupObserver() {
+		return state
+	}
+
+	//*
+	function setupViewer() {
+		return { crashes: state.crashes, isGameOcurring: state.gameOcurring }
+	}
+
+	//* Novo jogo
 	function start() {
 		state.timer = 0
-		state.timeCrash = calculateTimeCrash()
+		state.lastCrash = calculateTimeCrash()
 		state.currentTimeCrash = 0
-		state.isCrashed = false
+		state.gameOcurring = true
 		state.curveControll = 0
 
 		// Enviar state para front
-		notifyAll({ type: 'start-game', state })
+		const status: GameStatus = { isGameOcurring: state.gameOcurring }
+		notifyAllObservers({ type: 'start-game', state })
+		notifyAllViewers({ type: 'start-game', status })
 
 		let startTime = new Date().getTime()
 		const freq = 100
@@ -46,11 +78,11 @@ export default function createGame() {
 
 			// Calculo da curva
 			if (deltaTime > 10) {
-				const controll = state.timeCrash / deltaTime / 10
+				const controll = state.lastCrash / deltaTime / 10
 				state.curveControll += controll
 			}
 
-			if (state.currentTimeCrash < state.timeCrash) {
+			if (state.currentTimeCrash < state.lastCrash) {
 				state.currentTimeCrash = deltaTime
 			} else {
 				clearInterval(myTimer)
@@ -68,16 +100,23 @@ export default function createGame() {
 		return Math.random() * (max - min) + min
 	}
 
+	//* Crash
 	function crash() {
-		state.isCrashed = true
+		state.gameOcurring = false
+		const lastCrash = Number((state.lastCrash / 10 + 1).toFixed(2))
+		addNewCrash(lastCrash)
 
 		// Enviar state para front
-		notifyAll({ type: 'crashed', state })
+		notifyAllObservers({ type: 'crashed' })
 
 		let timerCount = 0
 
 		setTimeout(() => {
-			notifyAll({ type: 'timer', state })
+			const status: GameStatus = { crashes: state.crashes, isGameOcurring: state.gameOcurring }
+
+			notifyAllObservers({ type: 'timer', state })
+			notifyAllViewers({ type: 'timer', status })
+
 			const interval = 100
 
 			function timer() {
@@ -98,11 +137,25 @@ export default function createGame() {
 		}, 3_000)
 	}
 
+	//* Add novos crashes
+	const addNewCrash = (crash: number) => {
+		const crashes = state.crashes
+
+		if (crashes.length >= MAX_CRAHSES_LENTH) crashes.pop()
+
+		if (!crashes.length) crashes.push(crash)
+		else crashes.splice(0, 0, crash)
+
+		state.crashes = crashes
+	}
+
 	return {
 		state,
 		start,
 		calculateTimeCrash,
 		subscribe,
 		unsubscribe,
+		setupViewer,
+		setupObserver,
 	}
 }
