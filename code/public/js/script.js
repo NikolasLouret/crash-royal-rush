@@ -58,7 +58,6 @@ function renderGame() {
 		let startTime = new Date().getTime()
 		let teste = 0
 
-		let teste = 0
 		// Variáveis para o controle da curva de Bezier
 		let controlXVariance = canvas.width / 2 + (curveControll || 0)
 		let controlYVariance = canvas.height / 2 + (curveControll || 0)
