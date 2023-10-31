@@ -144,7 +144,7 @@ export default function createGame() {
 		if (crashes.length >= MAX_CRAHSES_LENTH) crashes.pop()
 
 		if (!crashes.length) crashes.push(crash)
-		else crashes.splice(0, 0, crash)
+		else crashes.unshift(crash)
 
 		state.crashes = crashes
 	}
