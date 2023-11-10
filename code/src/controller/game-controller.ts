@@ -93,6 +93,8 @@ export default function createGame() {
 		const myTimer = setInterval(calculateProgress, freq)
 	}
 
+	const getCurrentCrash = () => Number((state.currentTimeCrash / 10 + 1).toFixed(2))
+
 	function calculateTimeCrash() {
 		const min = 1
 		const max = 100
@@ -157,5 +159,6 @@ export default function createGame() {
 		unsubscribe,
 		setupViewer,
 		setupObserver,
+		getCurrentCrash,
 	}
 }

@@ -1,5 +1,5 @@
 import { server } from './http'
-import './socket-io'
+import './routes/socket-io'
 
 const port = process.env.PORT || 5500
 

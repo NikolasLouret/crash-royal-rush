@@ -1,13 +1,10 @@
-import { io, endpoint } from './http'
+import { io, endpoint } from '../http'
 import {
 	CommandFunctionGameType as CommandObserverType,
 	CommandFunctionViewerType as CommandViewerType,
-} from '../types/GameType'
-import { ObserverEnum } from '../types/ObserverEnum'
-import createGame from '../controller/game-instance'
-
-const game = createGame()
-game.start()
+} from '../../types/GameType'
+import { ObserverEnum } from '../../types/ObserverEnum'
+import { gameInstance as game } from '../game-instance'
 
 io.on('connection', socket => {
 	const commandFunction = (command: CommandObserverType) => {
