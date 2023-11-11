@@ -5,12 +5,7 @@ export type ObserverType = {
 
 export type CommandFunctionGameType = {
 	type: string
-	state?: GameType
-}
-
-export type CommandFunctionViewerType = {
-	type: string
-	status: GameStatus
+	state?: {}
 }
 
 export type GameType = {
@@ -20,9 +15,5 @@ export type GameType = {
 	timer: number
 	curveControll: number
 	lastCrash: number
-}
-
-export type GameStatus = {
-	crashes?: number[]
-	isGameOcurring: boolean
+	gameStatus: string
 }

@@ -1,10 +1,4 @@
-import {
-	ObserverType,
-	GameType,
-	CommandFunctionGameType as CommandObserverType,
-	CommandFunctionViewerType as CommandViewerType,
-	GameStatus,
-} from '../types/GameType'
+import { ObserverType, GameType, CommandFunctionGameType } from '../types/GameType'
 import { ObserverEnum } from '../types/ObserverEnum'
 
 const MAX_CRAHSES_LENTH = 25
@@ -22,6 +16,7 @@ export default function createGame() {
 		timer: 0,
 		curveControll: 0,
 		lastCrash: 0,
+		gameStatus: '',
 	}
 
 	function subscribe(observer: ObserverType, type: ObserverEnum) {
@@ -36,12 +31,12 @@ export default function createGame() {
 		else return false
 	}
 
-	function notifyAllObservers(command: CommandObserverType) {
+	function notifyAllObservers(command: CommandFunctionGameType) {
 		for (const observer of observers) {
 			observer.function(command)
 		}
 	}
-	function notifyAllViewers(command: CommandViewerType) {
+	function notifyAllViewers(command: CommandFunctionGameType) {
 		for (const viewer of viewers) {
 			viewer.function(command)
 		}
@@ -53,7 +48,7 @@ export default function createGame() {
 
 	//*
 	function setupViewer() {
-		return { crashes: state.crashes, isGameOcurring: state.gameOcurring }
+		return { crashes: state.crashes, gameStatus: state.gameStatus }
 	}
 
 	//* Novo jogo
@@ -63,11 +58,11 @@ export default function createGame() {
 		state.currentTimeCrash = 0
 		state.gameOcurring = true
 		state.curveControll = 0
+		state.gameStatus = 'start'
 
 		// Enviar state para front
-		const status: GameStatus = { isGameOcurring: state.gameOcurring }
 		notifyAllObservers({ type: 'start-game', state })
-		notifyAllViewers({ type: 'start-game', status })
+		notifyAllViewers({ type: 'start-game', state: { gameStatus: state.gameStatus } })
 
 		let startTime = new Date().getTime()
 		const freq = 100
@@ -97,7 +92,7 @@ export default function createGame() {
 
 	function calculateTimeCrash() {
 		const min = 1
-		const max = 100
+		const max = 20
 
 		return Math.random() * (max - min) + min
 	}
@@ -105,22 +100,31 @@ export default function createGame() {
 	//* Crash
 	function crash() {
 		state.gameOcurring = false
+		state.gameStatus = 'crashed'
+
 		const lastCrash = Number((state.lastCrash / 10 + 1).toFixed(2))
 		addNewCrash(lastCrash)
 
 		// Enviar state para front
 		notifyAllObservers({ type: 'crashed' })
+		notifyAllViewers({
+			type: 'crashed',
+			state: {
+				crashes: state.crashes,
+				crash: lastCrash,
+				gameStatus: state.gameStatus,
+			},
+		})
 
 		let timerCount = 0
 
 		setTimeout(() => {
-			const status: GameStatus = { crashes: state.crashes, isGameOcurring: state.gameOcurring }
+			state.gameStatus = 'timer'
 
 			notifyAllObservers({ type: 'timer', state })
-			notifyAllViewers({ type: 'timer', status })
+			notifyAllViewers({ type: 'timer', state: { gameStatus: state.gameStatus } })
 
 			const interval = 100
-
 			function timer() {
 				if (timerCount >= TIMER) {
 					clearInterval(timing)
