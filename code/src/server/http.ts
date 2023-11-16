@@ -9,14 +9,15 @@ const app = express()
 app.use(express.static(path.join(__dirname, '../../', 'public')))
 app.use(cors())
 
-app.use('/game/api', router)
+app.use('/api/game', router)
 
 const server = http.createServer(app)
 
-const io = new Server(server)
+const io = new Server(server, {
+	path: '/game',
+})
 
 const endpoint = new Server(server, {
-	path: '/api',
 	cors: {
 		origin: true,
 		credentials: true,

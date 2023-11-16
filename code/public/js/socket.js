@@ -1,4 +1,6 @@
-const socket = io()
+const socket = io('http://localhost:5500', {
+	path: '/game',
+})
 
 document.addEventListener('DOMContentLoaded', () => {
 	let game = null
