@@ -1,4 +1,4 @@
-const socket = io('http://localhost:5500', {
+const socket = io('https://crash-royal-rush.onrender.com', {
 	path: '/game',
 })
 
